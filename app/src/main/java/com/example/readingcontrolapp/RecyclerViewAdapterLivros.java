@@ -3,7 +3,9 @@ package com.example.readingcontrolapp;
 import androidx.annotation.NonNull;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -81,12 +84,28 @@ public class RecyclerViewAdapterLivros  extends RecyclerView.Adapter<RecyclerVie
     }
 
     public void removeLivro(int posicao) {
-        SQLiteLivrosDAO database = new SQLiteLivrosDAO();
-        boolean retorno = database.excluir(getLivro(posicao).getLivroID());
-        if(retorno) {
-            listaLivros = database.selectALL();
-            atualizarLista(listaLivros);
-        }
+        AlertDialog.Builder dialogo = new AlertDialog.Builder((Activity) context);
+        dialogo.setTitle("Excluir Livro da Lista"); //Título da janela de diálogo
+        dialogo.setMessage("Desejar excluir o "+ getLivro(posicao).getTitulo() +"?");
+        dialogo.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                SQLiteLivrosDAO database = new SQLiteLivrosDAO();
+                boolean retorno = database.excluir(getLivro(posicao).getLivroID());
+                if(retorno) {
+                    listaLivros = database.selectALL();
+                    atualizarLista(listaLivros);
+                    Toast.makeText((Activity) context, "Exclusão realizada com sucesso!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText((Activity) context, "Exclusão não realizada, ocorreu algum problema!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialogo.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialogo.show();
     }
 
     public void alteraLivro(int posicao) {
