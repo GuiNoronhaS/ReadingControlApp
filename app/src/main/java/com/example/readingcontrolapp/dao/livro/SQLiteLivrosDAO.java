@@ -1,7 +1,6 @@
 package com.example.readingcontrolapp.dao.livro;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -9,11 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.example.readingcontrolapp.dao.DAOFactory;
-import com.example.readingcontrolapp.dao.SQLiteDAOFactory;
 import com.example.readingcontrolapp.dao.SQLiteDatabaseHelper;
 import com.example.readingcontrolapp.entidade.Livro;
 
-public class SQLiteLivrosDAO extends SQLiteDAOFactory implements LivrosDAO, SQLiteMetaDadosLivro {
+public class SQLiteLivrosDAO extends DAOFactory implements LivrosDAO, SQLiteMetaDadosLivro {
 
     private SQLiteDatabaseHelper databaseHelper;
 
@@ -94,7 +92,6 @@ public class SQLiteLivrosDAO extends SQLiteDAOFactory implements LivrosDAO, SQLi
         }
     }
 
-
     public boolean alterar(Object obj) {
         if(obj == null ) {
             return false;
@@ -130,7 +127,6 @@ public class SQLiteLivrosDAO extends SQLiteDAOFactory implements LivrosDAO, SQLi
             }
         }
     }
-
 
     public boolean excluir(int ID) {
             SQLiteDatabase database = null;

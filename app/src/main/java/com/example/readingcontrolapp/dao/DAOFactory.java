@@ -2,7 +2,6 @@ package com.example.readingcontrolapp.dao;
 
 import android.content.Context;
 
-import com.example.readingcontrolapp.dao.livro.LivrosDAO;
 import com.example.readingcontrolapp.dao.livro.SQLiteLivrosDAO;
 
 
@@ -20,6 +19,4 @@ public abstract class DAOFactory {
     public static DAOFactory getDAOFactory() {
         return new SQLiteLivrosDAO();
     }
-
-    public abstract LivrosDAO getLivrosDAO();
 }
