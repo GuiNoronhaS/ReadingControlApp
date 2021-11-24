@@ -11,18 +11,6 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper implements SQLiteData
 
     public SQLiteDatabaseHelper(Context context) {
         super(context, SQLiteDatabaseDados.BANCODEDADOS, null, SQLiteDatabaseDados.VERSAO);
-        SQLiteDatabase database = null;
-        try {
-            database= this.getWritableDatabase();
-            database.rawQuery(METADADOSCREATE,null);
-        } catch(Exception e) {
-            System.out.println("Ocorreu um erro: " + e);
-        } finally {
-            if(database != null) {
-                database.close();
-            }
-            database = null;
-        }
     }
 
     @Override
