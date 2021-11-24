@@ -85,7 +85,7 @@ public class RecyclerViewAdapterLivros  extends RecyclerView.Adapter<RecyclerVie
 
     public void removeLivro(int posicao) {
         AlertDialog.Builder dialogo = new AlertDialog.Builder((Activity) context);
-        dialogo.setTitle("Excluir Livro da Lista"); //Título da janela de diálogo
+        dialogo.setTitle("Excluir Livro da Lista");
         dialogo.setMessage("Desejar excluir o "+ getLivro(posicao).getTitulo() +"?");
         dialogo.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
